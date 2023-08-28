@@ -100,8 +100,10 @@ if(NOT DEFINED UHD_PYTHON_DIR)
         "import os,sysconfig;\
         install_scheme = 'posix_prefix';\
         platlib = sysconfig.get_path('platlib', scheme=install_scheme);\
+        stdlib = sysconfig.get_path('stdlib', scheme=install_scheme);\
         prefix = sysconfig.get_config_var('prefix');\
-        print(os.path.relpath(platlib, prefix));"
+        newplatlib = os.path.join(stdlib, os.path.basename(platlib));\
+        print(os.path.relpath(newplatlib, prefix));"
         OUTPUT_VARIABLE UHD_PYTHON_DIR OUTPUT_STRIP_TRAILING_WHITESPACE
     )
 endif(NOT DEFINED UHD_PYTHON_DIR)
@@ -187,8 +189,10 @@ else()
             "import os,sysconfig;\
             install_scheme = 'posix_user';\
             platlib = sysconfig.get_path('platlib', scheme=install_scheme);\
+            stdlib = sysconfig.get_path('stdlib', scheme=install_scheme);\
             prefix = sysconfig.get_config_var('prefix');\
-            print(os.path.relpath(platlib, prefix));"
+            newplatlib = os.path.join(stdlib, os.path.basename(platlib));\
+            print(os.path.relpath(newplatlib, prefix));"
             OUTPUT_VARIABLE UHD_PYTHON_DIR OUTPUT_STRIP_TRAILING_WHITESPACE
         )
     endif(NOT DEFINED UHD_PYTHON_DIR)
